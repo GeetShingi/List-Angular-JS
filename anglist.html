@@ -32,7 +32,7 @@
 	<script type="text/javascript">
 		var app=angular.module("list",[])
 		app.controller("listctrl", function($scope){
-			$scope.list=[{item:'Geet',marks:50},{item:'GEET',marks:20}];
+			$scope.list=[];
 			$scope.additem=function(){
 				$scope.list.push({
 					item:$scope.addname,
