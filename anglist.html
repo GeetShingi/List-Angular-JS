@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Angular List</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="col-lg-offset-4 col-lg-4" ng-app="list" ng-controller="listctrl">
+			<center><h1>LIST</h1></center>
+			<ul>
+				<li ng-repeat="x in list | orderBy:'marks'" >
+					{{x.item}}
+					{{x.marks}}
+					<button class="btn btn-xs btn-danger" style="margin-left: 20px;" ng-click="remove(x)">X</button>
+				</li>
+			</ul>
+			<form name="myform">
+				<h3>Name:</h3><input placeholder="Enter Name" ng-model="addname" name="addname" required>
+				<span ng-show="myform.addname.$invalid && myform.addname.$touched">This is a required field</span>
+				<h3>Marks:</h3><input placeholder="Enter Marks" ng-model="addmarks" name="addmarks" required>
+				<span ng-show="myform.addmarks.$invalid && myform.addmarks.$touched">This is a required field</span>
+				<div><button style="margin-top: 10px;" class="btn btn-success" ng-click="additem()" ng-disabled="myform.addname.$invalid || myform.addmarks.$invalid"> ADD</button></div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var app=angular.module("list",[])
+		app.controller("listctrl", function($scope){
+			$scope.list=[{item:'Geet',marks:50},{item:'GEET',marks:20}];
+			$scope.additem=function(){
+				$scope.list.push({
+					item:$scope.addname,
+					marks:$scope.addmarks
+				});
+				$scope.addname="";
+				$scope.addmarks="";
+			}
+			$scope.remove=function(x){
+				var index=$scope.list.indexOf(x);
+				$scope.list.splice(index,1);
+			}
+		});
+	</script>
+</body>
+</html>
