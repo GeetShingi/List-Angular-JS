@@ -14,7 +14,7 @@
 		<div class="col-lg-offset-4 col-lg-4" ng-app="list" ng-controller="listctrl">
 			<center><h1>LIST</h1></center>
 			<ul>
-				<li ng-repeat="x in list | filter: marks" >
+				<li ng-repeat="x in list | orderBy: 'marks'" >
 					{{x.item}}
 					{{x.marks}}
 					<button class="btn btn-xs btn-danger" style="margin-left: 20px;" ng-click="remove(x)">X</button>
@@ -36,10 +36,10 @@
 			$scope.additem=function(){
 				$scope.list.push({
 					item:$scope.addname,
-					marks:$scope.addmarks
+					marks:parseInt($scope.addmarks)
 				});
 				$scope.addname="";
-				$scope.addmarks=0;
+				$scope.addmarks="";
 			}
 			$scope.remove=function(x){
 				var index=$scope.list.indexOf(x);
